@@ -7,7 +7,7 @@ import axios from "axios";
 const AddMovie = ({ setMovieList }) => {
   const history = useHistory();
   return (
-    <div>
+    <div className="add-form">
       <Formik
         initialValues={{ title: "", director: "", metascore: "", stars: [] }}
         onSubmit={(values, { resetForm }) => {

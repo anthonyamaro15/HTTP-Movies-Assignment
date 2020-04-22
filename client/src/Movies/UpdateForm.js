@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Formik, Form, Field } from "formik";
 import axios from "axios";
 
 const UpdateForm = ({ movies, setMovieList }) => {
@@ -17,7 +16,6 @@ const UpdateForm = ({ movies, setMovieList }) => {
     axios
       .get(`http://localhost:5003/api/movies/${id}`)
       .then((res) => {
-        //   console.log(res.data);
         setMovie(res.data);
       })
       .catch((err) => {
@@ -58,7 +56,6 @@ const UpdateForm = ({ movies, setMovieList }) => {
           metascore,
           stars: arr,
         };
-        console.log("obj here", obj);
         const newData = movies.map((mov) => {
           if (mov.id === Number(id)) {
             return (mov = obj);
@@ -74,7 +71,7 @@ const UpdateForm = ({ movies, setMovieList }) => {
   };
 
   return (
-    <div>
+    <div className="update-form">
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="movie">
@@ -127,31 +124,3 @@ const UpdateForm = ({ movies, setMovieList }) => {
 };
 
 export default UpdateForm;
-
-//   <Formik
-//     initialValues={movie}
-//     onSubmit={(values, { resetForm }) => {
-//       //  axios.put(`http://localhost:5003/api/movies/${id}`).then((res) => {
-//       //    console.log("res here ", res.data);
-//       //  });
-//       resetForm();
-//     }}
-//   >
-//     {() => (
-//       <Form>
-//         <label htmlFor="title">
-//           <Field type="text" name="title" id="title" />
-//         </label>
-//         <label htmlFor="director">
-//           <Field type="text" name="director" id="director" />
-//         </label>
-//         <label htmlFor="metascore">
-//           <Field type="text" name="metascore" id="metascore" />
-//         </label>
-//         <label htmlFor="stars">
-//           <Field type="text" name="stars" id="stars" />
-//         </label>
-//         <button type="submit">save</button>
-//       </Form>
-//     )}
-//   </Formik>;
