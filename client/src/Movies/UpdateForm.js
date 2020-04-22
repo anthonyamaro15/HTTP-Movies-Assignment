@@ -17,7 +17,7 @@ const UpdateForm = ({ movies, setMovieList }) => {
     axios
       .get(`http://localhost:5003/api/movies/${id}`)
       .then((res) => {
-        console.log(res.data);
+        //   console.log(res.data);
         setMovie(res.data);
       })
       .catch((err) => {
@@ -36,9 +36,10 @@ const UpdateForm = ({ movies, setMovieList }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { title, director, metascore, stars } = movie;
+    const { title, director, metascore, stars, id } = movie;
     const arr = stars.split(",");
     const obj = {
+      id,
       title,
       director,
       metascore,
@@ -48,25 +49,29 @@ const UpdateForm = ({ movies, setMovieList }) => {
     axios
       .put(`http://localhost:5003/api/movies/${id}`, movie)
       .then((res) => {
-        const { title, director, metascore, stars } = res.data;
+        const { title, director, metascore, stars, id } = res.data;
         const arr = stars.split(",");
         const obj = {
+          id,
           title,
           director,
           metascore,
           stars: arr,
         };
-        console.log("response here ", obj);
+        console.log("obj here", obj);
+        const newData = movies.map((mov) => {
+          if (mov.id === Number(id)) {
+            return (mov = obj);
+          }
+          return mov;
+        });
+        setMovieList(newData);
+        history.push("/");
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
-  //   console.log("data here ", movie);
-
-  //   const getMovie = movies.find((movie) => movie.id === Number(id));
-  //   const { title, director, metascore, stars } = getMovie;
 
   return (
     <div>
