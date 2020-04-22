@@ -52,6 +52,15 @@ body {
   position: relative;
   width: 75%;
   margin: 1rem auto;
+
+  button {
+    margin-bottom: 1rem;
+    display: inline-block;
+    padding: 0.4rem 1.5rem;
+    border: 1px solid rgb(179, 175, 175);
+    border-radius: 4px;
+    cursor: pointer;
+  }
 }
 .save-button {
   position: absolute;
